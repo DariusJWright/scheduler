@@ -13,8 +13,6 @@ var color = function (itemTime) {
     var time = moment(elem).format("hh:mm:ss");
 
     itemTime.children().each().removeClass("past present future");
-    
-    
 
     if (moment().isAfter(time)) {
         $(itemTime).children().each().addClass("past");
@@ -39,6 +37,5 @@ var loadItems = function () {
 $(".saveBtn").on("click", function () {
     localStorage.setItem("item", JSON.stringify(items));
 });
-
 
 loadItems ();
