@@ -6,42 +6,34 @@ var textArea = $("<textarea>").addClass("form-control");
 var item = $(".item");
 
 
-function color (time) {
-    var time = item;
+var color = function (itemTime) {
+    console.log(itemTime);
+    console.log(itemTime.children());
     var elem = $(".hour").text();
+    var time = moment(elem).format("hh:mm:ss");
 
-    time.children().each().removeClass("past present future");
+    itemTime.children().each().removeClass("past present future");
     
-    console.log(time);
+    
 
-    if (moment().isAfter(elem)) {
-        $(this).children().each().addClass("past");
+    if (moment().isAfter(time)) {
+        $(itemTime).children().each().addClass("past");
     }
-    else if (moment().isBefore(elem)) {
-        $(this).children().each().addClass("future");
+    else if (moment().isBefore(time)) {
+        $(itemTime).children().each().addClass("future");
     }
     else {
-        $(this).children().each().addClass("present");
+        $(itemTime).children().each().addClass("present");
     }
-    console.log(this);
 }
-setInterval(color, 1000 * 60);
-
-
-$(".item").on("change", function () {
-    items = $(this).val().trim();
-    console.log(items);
-});
-
-
+setInterval(color(item), 1000 * 60);
 
 var loadItems = function () {
-    
     item.append(textArea);
 
     items = JSON.parse(localStorage.getItem("item"));
 
-    color();
+    color(item);
 }
 
 $(".saveBtn").on("click", function () {
